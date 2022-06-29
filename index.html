@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Mario Platformer</title>
+    <link id="icon" rel="icon" href="images/player/stand.png">
   </head>
   <body>
     <img id="gameBackground" src="images/background.png" hidden>
@@ -179,6 +181,7 @@
       ctx.clearRect(0, 0, gamescreen.width, gamescreen.height)
       if (windowloaded == 1) {
         getplayerimage()
+        icon.href = playerimage.src
         ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
         drawtiles()
         ctx.drawImage(playerimage, mariox, marioy, 32, 32)
