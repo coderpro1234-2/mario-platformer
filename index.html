@@ -6,6 +6,7 @@
   </head>
   <body>
     <img id="gameBackground" src="images/background.png" hidden>
+    <img id="coinblock" src="images/coin.png" hidden>
     <img id="groundblock" src="images/ground.png" hidden>
     <img id="playerwalk1" src="images/player/walk1.png" hidden>
     <img id="playerwalk2" src="images/player/walk2.png" hidden>
@@ -18,32 +19,44 @@
     <img id="playerstandr" src="images/player/standr.png" hidden>
     <img id="playerjumpr" src="images/player/jumpr.png" hidden>
     <center>
-      <canvas id="game" width="320", height="320"></canvas>
+      <h3 id="coin">Coins: 0</h3>
+      <canvas id="game" width="640", height="640"></canvas>
     </center>
   </body>
   <script>
-    const gametimes = [1,1,1,1,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,1,1,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,1,1,0,1,
-    1,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,1,1,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1]
+    const gametimes = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,'c','c',0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,'c','c',0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     const playerframes = []
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
     var velx = 0
     var vely = 0
-    var mariox = 150
-    var marioy = 150
+    var mariox = 304
+    var marioy = 576
     var ground = 'no'
     var xid = 0
     var yid = 0
     var key = ""
+    var coins = 0
     var pressedKeys = {};
     window.onkeyup = function(e) { pressedKeys[e.keyCode] = false; }
     window.onkeydown = function(e) { pressedKeys[e.keyCode] = true; }
@@ -51,8 +64,18 @@
     function calcmario(offx, offy) {
       xid = Math.floor((mariox+offx)/32)
       yid = Math.floor((marioy+offy)/32)
-      itemid = gametimes[xid+(yid*10)]
-      return itemid;
+      itemid = gametimes[xid+(yid*20)]
+      if (!isNaN(itemid)) {
+       return itemid;
+      }
+      else {
+        if (itemid = 'c') {
+          coins ++
+          gametimes[xid+(yid*20)] = 0
+          document.getElementById("coin").innerHTML = "Coins: "+coins
+        }
+        return 0;
+      }
     }
 
     function checkleftright() {
@@ -71,28 +94,6 @@
       count += calcmario(1, 31)
       count += calcmario(31, 1)
       return count;
-    }
-
-    function movemariox(x) {
-      movex = x/Math.abs(x)
-      if (isNaN(movex)) {
-        movex = 0
-      }
-      g = 0
-      while (g < (Math.abs(x))+1) {
-        mariox += movex
-        if (checkupdown() > 0) {
-          mariox -= movex
-          velx = 0
-          return;
-        }
-        if (checkupdown() > 0) {
-          mariox -= movex
-          velx = 0
-          return;
-        }
-        g += 1
-      }
     }
 
     function movemario() {
@@ -145,14 +146,17 @@
       collum = 0
       itemnum = 0
       i = 0
-      while (i < 10) {
+      while (i < 20) {
         row = 0
         i2 = 0
-        while (i2 < 10) {
+        while (i2 < 20) {
           row += 32
           itemnum += 1
           if (gametimes[itemnum-1] == 1) {
-            ctx.drawImage(groundblock, row-32, collum, gamescreen.width/10, gamescreen.height/10)
+            ctx.drawImage(groundblock, row-32, collum, gamescreen.width/20, gamescreen.height/20)
+          }
+          else if (gametimes[itemnum-1] == 'c') {
+            ctx.drawImage(coin, row-32, collum, gamescreen.width/20, gamescreen.height/20)
           }
           i2 += 1
         }
@@ -202,6 +206,7 @@
       windowloaded = 1
       groundblock = document.getElementById("groundblock")
       background = document.getElementById("gameBackground")
+      coin = document.getElementById("coinblock")
     }
   </script>
 </html>
