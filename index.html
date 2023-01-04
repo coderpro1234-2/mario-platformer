@@ -24,6 +24,7 @@
     </center>
   </body>
   <script>
+    const keys = ["nevergonnagoaway"]
     const gametimes = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,0,0,0,0,0,0,0,'c','c',0,0,0,0,0,0,0,0,1,
@@ -132,12 +133,12 @@
       if (e == "a" || e == "ArrowLeft") {
       //if (pressedKeys[37]) {
         key = "r"
-        velx -= 5
+        velx -= 0.5
       }
       if (e == "d" || e == "ArrowRight") {
       //if (pressedKeys[39]) {
         key = ""
-        velx += 5
+        velx += 0.5
       }
     }
 
@@ -196,12 +197,23 @@
     setInterval(function(){
       movemario()
       drawscreen()
+      i = 0
+      while (i < keys.length) {
+        checkkeys(keys[i])
+        i ++
+      }
     }, 1)
 
-    document.addEventListener("keydown", function(e){
-      checkkeys(e.key)
+    document.addEventListener("keydown",function(e){
+      if (keys.includes(e.key) == false) {
+        keys.push(e.key)
+      }
     })
-
+    document.addEventListener("keyup",function(e){
+      if (keys.includes(e.key)) {
+        keys.splice(keys.indexOf(e.key),keys.indexOf(e.key))
+      }
+})
     window.onload = function() {
       windowloaded = 1
       groundblock = document.getElementById("groundblock")
