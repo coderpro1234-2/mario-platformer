@@ -113,8 +113,10 @@
       ground = 'no'
       if (checkleftright() > 0) {
         marioy -= vely
+        if (vely < 0.01) {
+          ground = 'yes'
+        }
         vely = 0
-        ground = 'yes'
       }
       if (checkleftright() > 0) {
         marioy -= vely
