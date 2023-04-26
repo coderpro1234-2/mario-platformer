@@ -69,7 +69,7 @@
     var screenwidth = 22
     var scrolllength = 0
     var scrollx = 0
-    var minscroll = -99999999
+    var minscroll = -192
     var maxscroll = 0
     function calcmario(offx, offy) {
       xid = Math.floor((mariox+(offx))/32)
@@ -131,7 +131,7 @@
         if (keys.includes(" ")) {
           velx -= 0.2
         }
-        velx -= 0.4
+        velx -= 0.6
       }
       if (keys.includes("d") || keys.includes("ArrowRight")) {
         if (ground == "yes") {
@@ -140,7 +140,7 @@
         if (keys.includes(" ")) {
           velx += 0.2
         }
-        velx += 0.4
+        velx += 0.6
       }
       if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
