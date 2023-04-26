@@ -16,11 +16,13 @@
     <img id="playerwalk3" src="images/player/walk3.png" hidden>
     <img id="playerstand" src="images/player/stand.png" hidden>
     <img id="playerjump" src="images/player/jump.png" hidden>
+    <img id="playercrouch" src="images/player/crouch.png" hidden>
     <img id="playerwalk1r" src="images/player/walk1r.png" hidden>
     <img id="playerwalk2r" src="images/player/walk2r.png" hidden>
     <img id="playerwalk3r" src="images/player/walk3r.png" hidden>
     <img id="playerstandr" src="images/player/standr.png" hidden>
     <img id="playerjumpr" src="images/player/jumpr.png" hidden>
+    <img id="playercrouchr" src="images/player/crouchr.png" hidden>
     <img id="pipese1" src="images/pipes/pipe-se1.png" hidden>
     <img id="pipese2" src="images/pipes/pipe-se2.png" hidden>
     <img id="pipesm1" src="images/pipes/pipe-sm1.png" hidden>
@@ -142,6 +144,11 @@
         }
         velx += 0.6
       }
+      if (keys.includes("s") || keys.includes("ArrowDown")) {
+        if (ground == "yes") {
+          velx /= 2
+        } 
+      }
       if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
           vely = -4.5
@@ -218,6 +225,10 @@
       playerimage = document.getElementById("playerstand"+key)
       if (ground == 'no') {
         playerimage = document.getElementById("playerjump"+key)
+        return;
+      }
+      if (keys.includes("s") || keys.includes("ArrowDown")) {
+        playerimage = document.getElementById("playercrouch"+key)
         return;
       }
       if (Math.abs(velx) > 0.08) {
