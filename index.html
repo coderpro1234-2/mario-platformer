@@ -8,6 +8,9 @@
     <img id="gameBackground" src="images/background.png" hidden>
     <img id="coinblock" src="images/coin.png" hidden>
     <img id="groundblock" src="images/ground.png" hidden>
+    <img id="brickblock" src="images/brick.png" hidden>
+    <img id="under-groundblock" src="images/under-ground.png" hidden>
+    <img id="under-brickblock" src="images/under-brick.png" hidden>
     <img id="playerwalk1" src="images/player/walk1.png" hidden>
     <img id="playerwalk2" src="images/player/walk2.png" hidden>
     <img id="playerwalk3" src="images/player/walk3.png" hidden>
@@ -18,77 +21,72 @@
     <img id="playerwalk3r" src="images/player/walk3r.png" hidden>
     <img id="playerstandr" src="images/player/standr.png" hidden>
     <img id="playerjumpr" src="images/player/jumpr.png" hidden>
+    <img id="pipese1" src="images/pipes/pipe-se1.png" hidden>
+    <img id="pipese2" src="images/pipes/pipe-se2.png" hidden>
+    <img id="pipesm1" src="images/pipes/pipe-sm1.png" hidden>
+    <img id="pipesm2" src="images/pipes/pipe-sm2.png" hidden>
+    <img id="pipesc1" src="images/pipes/pipe-sc1.png" hidden>
+    <img id="pipesc2" src="images/pipes/pipe-sc2.png" hidden>
+    <img id="pipeue1" src="images/pipes/pipe-ue1.png" hidden>
+    <img id="pipeue2" src="images/pipes/pipe-ue2.png" hidden>
+    <img id="pipeum1" src="images/pipes/pipe-um1.png" hidden>
+    <img id="pipeum2" src="images/pipes/pipe-um2.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
-      <canvas id="game" width="640", height="640"></canvas>
+      <canvas id="game" width="512", height="448"></canvas>
     </center>
   </body>
   <script>
     const keys = ["nevergonnagoaway"]
-    const gametimes = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,'c','c',0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,'c','c',0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,
+    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,12,14,16,20,4,4,4,4,4,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
     var velx = 0
     var vely = 0
-    var mariox = 304
-    var marioy = 576
+    var mariox = 48
+    var marioy = -32
     var ground = 'no'
     var xid = 0
     var yid = 0
     var key = ""
     var coins = 0
-    var pressedKeys = {};
-    window.onkeyup = function(e) { pressedKeys[e.keyCode] = false; }
-    window.onkeydown = function(e) { pressedKeys[e.keyCode] = true; }
-
+    var animation = 0
+    var screenwidth = 22
+    var scrolllength = 0
+    var scrollx = 0
+    var minscroll = -99999999
+    var maxscroll = 0
     function calcmario(offx, offy) {
-      xid = Math.floor((mariox+offx)/32)
-      yid = Math.floor((marioy+offy)/32)
-      itemid = gametimes[xid+(yid*20)]
-      if (!isNaN(itemid)) {
-       return itemid;
-      }
-      else {
-        if (itemid = 'c') {
-          coins ++
-          gametimes[xid+(yid*20)] = 0
-          document.getElementById("coin").innerHTML = "Coins: "+coins
-        }
+      xid = Math.floor((mariox+(offx))/32)
+      yid = Math.floor((marioy+(offy))/32)
+      itemid = gametimes[xid+(yid*(screenwidth+scrolllength))]
+      if (itemid == 99) {
+        gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
+        coins ++
+        document.getElementById("coin").innerHTML = "Coins: "+coins
         return 0;
       }
+      else {
+        return itemid;
+      }
     }
 
-    function checkleftright() {
-      count = 0
-      count += calcmario(1, 1)
-      count += calcmario(31, 31)
-      count += calcmario(1, 31)
-      count += calcmario(31, 1)
-      return count;
-    }
-
-    function checkupdown() {
+    function checkamrio() {
       count = 0
       count += calcmario(1, 1)
       count += calcmario(31, 31)
@@ -98,50 +96,58 @@
     }
 
     function movemario() {
-      vely += 0.03
+      vely += 0.08
       velx = velx * 0.8
       mariox += velx
-      if (checkupdown() > 0) {
+      if (checkamrio() > 0) {
         mariox -= velx
         velx = 0
       }
-      if (checkupdown() > 0) {
-        mariox -= velx
-        velx = 0
+      if (mariox > 224) {
+        scrollx -= velx
+      }
+      if (scrollx < minscroll) {
+        scrollx = minscroll
+      }
+      if (scrollx > maxscroll) {
+        scrollx = maxscroll
       }
       marioy += vely
       ground = 'no'
-      if (checkleftright() > 0) {
+      if (checkamrio() > 0) {
         marioy -= vely
         if (vely > -0.01) {
           ground = 'yes'
         }
         vely = 0
       }
-      if (checkleftright() > 0) {
-        marioy -= vely
-        vely = 0
-      }
     }
 
-    function checkkeys(e) {
-      if (e == "w" || e == "ArrowUp") {
-      //if (pressedKeys[38]) {
+    function checkkeys() {
+      if (keys.includes("a") || keys.includes("ArrowLeft")) {
+        if (ground == "yes") {
+          key = "r"
+        }
+        if (keys.includes(" ")) {
+          velx -= 0.2
+        }
+        velx -= 0.4
+      }
+      if (keys.includes("d") || keys.includes("ArrowRight")) {
+        if (ground == "yes") {
+          key = ""
+        }
+        if (keys.includes(" ")) {
+          velx += 0.2
+        }
+        velx += 0.4
+      }
+      if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
-          vely = -2.8
+          vely = -4.5
           ground = 'no'
         }
-      }
-      if (e == "a" || e == "ArrowLeft") {
-      //if (pressedKeys[37]) {
-        key = "r"
-        velx -= 0.5
-      }
-      if (e == "d" || e == "ArrowRight") {
-      //if (pressedKeys[39]) {
-        key = ""
-        velx += 0.5
-      }
+      }      
     }
 
     function drawtiles() {
@@ -149,22 +155,62 @@
       collum = 0
       itemnum = 0
       i = 0
-      while (i < 20) {
-        row = 0
-        i2 = 0
-        while (i2 < 20) {
+      i2 = 0
+      while (i < 14) {
+        while (i2 < screenwidth) {
           row += 32
           itemnum += 1
           if (gametimes[itemnum-1] == 1) {
-            ctx.drawImage(groundblock, row-32, collum, gamescreen.width/20, gamescreen.height/20)
+            ctx.drawImage(groundblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
           }
-          else if (gametimes[itemnum-1] == 'c') {
-            ctx.drawImage(coin, row-32, collum, gamescreen.width/20, gamescreen.height/20)
+          if (gametimes[itemnum-1] == 2) {
+            ctx.drawImage(brickblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 3) {
+            ctx.drawImage(under_groundblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 4) {
+            ctx.drawImage(under_brickblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 11) {
+            ctx.drawImage(pipese1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 12) {
+            ctx.drawImage(pipese2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 13) {
+            ctx.drawImage(pipesm1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 14) {
+            ctx.drawImage(pipesm2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 15) {
+            ctx.drawImage(pipesc1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 16) {
+            ctx.drawImage(pipesc2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 17) {
+            ctx.drawImage(pipeue1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 18) {
+            ctx.drawImage(pipeue2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 19) {
+            ctx.drawImage(pipeum1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 20) {
+            ctx.drawImage(pipeum2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 99) {
+            ctx.drawImage(coin, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
           }
           i2 += 1
         }
         collum += 32
         i += 1
+        row = 0-(scrolllength*32)
+        i2 = 0-scrolllength
       }
     }
 
@@ -176,7 +222,7 @@
       }
       if (Math.abs(velx) > 0.08) {
         animation += 0.1
-        playerimage = document.getElementById("playerwalk"+((Math.round(animation)%2)+1)+key)
+        playerimage = document.getElementById("playerwalk"+((Math.round(animation)%3)+1)+key)
         return;
       }
       animation = 0
@@ -191,7 +237,7 @@
         icon.href = playerimage.src
         ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
         drawtiles()
-        ctx.drawImage(playerimage, mariox, marioy, 32, 32)
+        ctx.drawImage(playerimage, mariox+scrollx, marioy, 32, 32)
       }
       ctx.stroke()
     }
@@ -199,11 +245,8 @@
     setInterval(function(){
       movemario()
       drawscreen()
-      i = 0
-      while (i < keys.length) {
-        checkkeys(keys[i])
-        i ++
-      }
+      checkkeys()
+      //scrollx = 0
     }, 1)
 
     document.addEventListener("keydown",function(e){
@@ -219,8 +262,21 @@
     window.onload = function() {
       windowloaded = 1
       groundblock = document.getElementById("groundblock")
+      brickblock = document.getElementById("brickblock")
+      under_groundblock = document.getElementById("under-groundblock")
+      under_brickblock = document.getElementById("under-brickblock")
       background = document.getElementById("gameBackground")
       coin = document.getElementById("coinblock")
+      pipese1 = document.getElementById("pipese1")
+      pipese2 = document.getElementById("pipese2")
+      pipesm1 = document.getElementById("pipesm1")
+      pipesm2 = document.getElementById("pipesm2")
+      pipesc1 = document.getElementById("pipesc1")
+      pipesc2 = document.getElementById("pipesc2")
+      pipeue1 = document.getElementById("pipeue1")
+      pipeue2 = document.getElementById("pipeue2")
+      pipeum1 = document.getElementById("pipeum1")
+      pipeum2 = document.getElementById("pipeum2")
     }
   </script>
 </html>
