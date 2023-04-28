@@ -133,8 +133,8 @@
     function checkmario(feet) {
       count = 0
       if (feet) {
-        count += calcmario(31, 31, false)
-        count += calcmario(1, 31, false)        
+        count += calcmario(31, 33, false)
+        count += calcmario(1, 33, false)        
       }
       else {
         count += calcmario(1, 1-(marheight-32), false)
@@ -168,9 +168,9 @@
       }
       marioy += vely
       ground = 'no'
-      if (checkmario(true) > 0) {
+      if (checkmario(false) > 0) {
         marioy -= vely
-        if (vely > -0.01) {
+        if (checkmario(true) && vely > -0.01) {
           ground = 'yes'
         }
         vely = 0
