@@ -11,18 +11,30 @@
     <img id="brickblock" src="images/brick.png" hidden>
     <img id="under-groundblock" src="images/under-ground.png" hidden>
     <img id="under-brickblock" src="images/under-brick.png" hidden>
-    <img id="playerwalk1" src="images/player/walk1.png" hidden>
-    <img id="playerwalk2" src="images/player/walk2.png" hidden>
-    <img id="playerwalk3" src="images/player/walk3.png" hidden>
-    <img id="playerstand" src="images/player/stand.png" hidden>
-    <img id="playerjump" src="images/player/jump.png" hidden>
-    <img id="playercrouch" src="images/player/crouch.png" hidden>
-    <img id="playerwalk1r" src="images/player/walk1r.png" hidden>
-    <img id="playerwalk2r" src="images/player/walk2r.png" hidden>
-    <img id="playerwalk3r" src="images/player/walk3r.png" hidden>
-    <img id="playerstandr" src="images/player/standr.png" hidden>
-    <img id="playerjumpr" src="images/player/jumpr.png" hidden>
-    <img id="playercrouchr" src="images/player/crouchr.png" hidden>
+    <img id="smallplayerwalk1" src="images/player/small/walk1.png" hidden>
+    <img id="smallplayerwalk2" src="images/player/small/walk2.png" hidden>
+    <img id="smallplayerwalk3" src="images/player/small/walk3.png" hidden>
+    <img id="smallplayerstand" src="images/player/small/stand.png" hidden>
+    <img id="smallplayerjump" src="images/player/small/jump.png" hidden>
+    <img id="smallplayercrouch" src="images/player/small/crouch.png" hidden>
+    <img id="smallplayerwalk1r" src="images/player/small/walk1r.png" hidden>
+    <img id="smallplayerwalk2r" src="images/player/small/walk2r.png" hidden>
+    <img id="smallplayerwalk3r" src="images/player/small/walk3r.png" hidden>
+    <img id="smallplayerstandr" src="images/player/small/standr.png" hidden>
+    <img id="smallplayerjumpr" src="images/player/small/jumpr.png" hidden>
+    <img id="smallplayercrouchr" src="images/player/small/crouchr.png" hidden>
+    <img id="bigplayerwalk1" src="images/player/big/walk1.png" hidden>
+    <img id="bigplayerwalk2" src="images/player/big/walk2.png" hidden>
+    <img id="bigplayerwalk3" src="images/player/big/walk3.png" hidden>
+    <img id="bigplayerstand" src="images/player/big/stand.png" hidden>
+    <img id="bigplayerjump" src="images/player/big/jump.png" hidden>
+    <img id="bigplayercrouch" src="images/player/big/crouch.png" hidden>
+    <img id="bigplayerwalk1r" src="images/player/big/walk1r.png" hidden>
+    <img id="bigplayerwalk2r" src="images/player/big/walk2r.png" hidden>
+    <img id="bigplayerwalk3r" src="images/player/big/walk3r.png" hidden>
+    <img id="bigplayerstandr" src="images/player/big/standr.png" hidden>
+    <img id="bigplayerjumpr" src="images/player/big/jumpr.png" hidden>
+    <img id="bigplayercrouchr" src="images/player/big/crouchr.png" hidden>
     <img id="pipese1" src="images/pipes/pipe-se1.png" hidden>
     <img id="pipese2" src="images/pipes/pipe-se2.png" hidden>
     <img id="pipesm1" src="images/pipes/pipe-sm1.png" hidden>
@@ -33,6 +45,10 @@
     <img id="pipeue2" src="images/pipes/pipe-ue2.png" hidden>
     <img id="pipeum1" src="images/pipes/pipe-um1.png" hidden>
     <img id="pipeum2" src="images/pipes/pipe-um2.png" hidden>
+    <img id="mushroom" src="images/power-ups/mushroom.png" hidden>
+    <img id="oneup" src="images/power-ups/oneup.png" hidden>
+    <img id="fireflower" src="images/power-ups/fireflower.png" hidden>
+    <img id="star" src="images/power-ups/star.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
       <canvas id="game" width="512", height="448"></canvas>
@@ -40,43 +56,69 @@
   </body>
   <script>
     const keys = ["nevergonnagoaway"]
-    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,
-    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,12,14,16,20,4,4,4,4,4,
-    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
     var velx = 0
     var vely = 0
+    var mariotype = "small"
     var mariox = 48
-    var marioy = -32
+    var marioy = 32
+    var marwidth = 32
+    var marheight = 64
+    var blockwidth = 32
+    var blockheight = 32
     var ground = 'no'
     var xid = 0
     var yid = 0
     var key = ""
     var coins = 0
     var animation = 0
-    var screenwidth = 22
+    var screenwidth = 30
     var scrolllength = 0
     var scrollx = 0
-    var minscroll = -192
+    var minscroll = -9999999999
     var maxscroll = 0
-    function calcmario(offx, offy) {
-      xid = Math.floor((mariox+(offx))/32)
-      yid = Math.floor((marioy+(offy))/32)
+    function getblock(offx,offy) {
+      xid = Math.floor((mariox+(offx))/blockwidth)
+      yid = Math.floor((marioy+(offy))/blockheight)
       itemid = gametimes[xid+(yid*(screenwidth+scrolllength))]
+      return itemid;
+    }
+    function calcmario(offx, offy, brick) {
+      xid = Math.floor((mariox+(offx))/blockwidth)
+      yid = Math.floor((marioy+(offy))/blockheight)
+      itemid = gametimes[xid+(yid*(screenwidth+scrolllength))]
+      if ((itemid == 4 || itemid == 2) && brick) {
+        if (offy == 1-(marheight-32) && mariotype != "small" && vely < 0) {
+          gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
+          marioy -= vely
+          ground = "no"
+          vely = 0.5
+          return 0;
+        }
+        return itemid;
+      }
+      if (itemid == 95) {
+        gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
+        mariotype = "big"
+        return 0;
+      }
       if (itemid == 99) {
         gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
         coins ++
@@ -88,20 +130,30 @@
       }
     }
 
-    function checkamrio() {
+    function checkmario(feet) {
       count = 0
-      count += calcmario(1, 1)
-      count += calcmario(31, 31)
-      count += calcmario(1, 31)
-      count += calcmario(31, 1)
+      if (feet) {
+        count += calcmario(31, 31, false)
+        count += calcmario(1, 31, false)        
+      }
+      else {
+        count += calcmario(1, 1-(marheight-32), false)
+        count += calcmario(1, 1, false)
+        count += calcmario(31, 31, false)
+        count += calcmario(1, 31, false)  
+        count += calcmario(31, 1-(marheight-32), false)
+        count += calcmario(31, 1, false)
+        count += calcmario(30, 1-(marheight-32), true)
+        count += calcmario(3, 1-(marheight-32), true)        
+      }
       return count;
     }
 
     function movemario() {
-      vely += 0.08
+      vely += 0.2
       velx = velx * 0.8
       mariox += velx
-      if (checkamrio() > 0) {
+      if (checkmario(false) > 0) {
         mariox -= velx
         velx = 0
       }
@@ -116,12 +168,23 @@
       }
       marioy += vely
       ground = 'no'
-      if (checkamrio() > 0) {
+      if (checkmario(true) > 0) {
         marioy -= vely
         if (vely > -0.01) {
           ground = 'yes'
         }
         vely = 0
+      }
+      if (mariotype == "small") {
+        marwidth = 32
+        marheight = 32
+      }
+      if (mariotype == "big") {
+        marwidth = 32
+        marheight = 64
+        if ((keys.includes("s") || keys.includes("ArrowDown")) && ground == "yes") {
+          marheight = 48
+        }
       }
     }
 
@@ -151,7 +214,7 @@
       }
       if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
-          vely = -4.5
+          vely = -7.3
           ground = 'no'
         }
       }      
@@ -209,6 +272,18 @@
           else if (gametimes[itemnum-1] == 20) {
             ctx.drawImage(pipeum2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
           }
+          else if (gametimes[itemnum-1] == 95) {
+            ctx.drawImage(mushroom, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 96) {
+            ctx.drawImage(oneup, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 97) {
+            ctx.drawImage(fireflower, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
+          else if (gametimes[itemnum-1] == 98) {
+            ctx.drawImage(star, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+          }
           else if (gametimes[itemnum-1] == 99) {
             ctx.drawImage(coin, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
           }
@@ -222,18 +297,18 @@
     }
 
     function getplayerimage() {
-      playerimage = document.getElementById("playerstand"+key)
+      playerimage = document.getElementById(mariotype+"playerstand"+key)
       if (ground == 'no') {
-        playerimage = document.getElementById("playerjump"+key)
+        playerimage = document.getElementById(mariotype+"playerjump"+key)
         return;
       }
       if (keys.includes("s") || keys.includes("ArrowDown")) {
-        playerimage = document.getElementById("playercrouch"+key)
+        playerimage = document.getElementById(mariotype+"playercrouch"+key)
         return;
       }
       if (Math.abs(velx) > 0.08) {
         animation += 0.1
-        playerimage = document.getElementById("playerwalk"+((Math.round(animation)%3)+1)+key)
+        playerimage = document.getElementById(mariotype+"playerwalk"+((Math.round(animation)%3)+1)+key)
         return;
       }
       animation = 0
@@ -248,15 +323,15 @@
         icon.href = playerimage.src
         ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
         drawtiles()
-        ctx.drawImage(playerimage, mariox+scrollx, marioy, 32, 32)
+        ctx.drawImage((playerimage), mariox+scrollx, marioy-(marheight-32), marwidth, marheight)
       }
       ctx.stroke()
     }
 
     setInterval(function(){
+      checkkeys()
       movemario()
       drawscreen()
-      checkkeys()
     }, 16)
 
     document.addEventListener("keydown",function(e){
@@ -287,6 +362,10 @@
       pipeue2 = document.getElementById("pipeue2")
       pipeum1 = document.getElementById("pipeum1")
       pipeum2 = document.getElementById("pipeum2")
+      mushroom = document.getElementById("mushroom")
+      oneup = document.getElementById("oneup")
+      fireflower = document.getElementById("fireflower")
+      star = document.getElementById("star")
     }
   </script>
 </html>
