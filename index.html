@@ -62,26 +62,27 @@
   </body>
   <script>
     const keys = ["nevergonnagoaway"]
-    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,2,4,2,4,2,4,4,4,2,4,2,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,4,4,2,4,2,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     const invisblock = [95,96,97,98,99]
-    enemydata = [[608,256,-0.7,0,1,"goombaover",false],[325,256,-0.7,0,1,"goombaunder",false]]
+    var enemydata = [[608,256,-0.7,0,1,"goombaover",false],[325,256,-0.7,0,1,"goombaunder",false]]
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
+    var globaltimer = 0
     var velx = 0
     var vely = 0
     var mariotype = "small"
@@ -99,7 +100,7 @@
     var key = ""
     var coins = 0
     var animation = 0
-    var screenwidth = 30
+    var screenwidth = 38
     var scrolllength = 0
     var scrollx = 0
     var minscroll = -9999999999
@@ -262,7 +263,7 @@
             enesx = 0
             enesy = 0
             enetimer = -1.5
-            vely -= 10
+            vely = -5
           }
         }
         if (((Math.round(tmarioy) == Math.round(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
@@ -301,9 +302,7 @@
         velx += 0.8
       }
       if (keys.includes("s") || keys.includes("ArrowDown")) {
-        if (ground == "yes") {
-          velx /= 2
-        } 
+        velx /= 2
       }
       if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
@@ -329,61 +328,61 @@
           row += 32
           itemnum += 1
           if (gametimes[itemnum-1] == 1) {
-            ctx.drawImage(groundblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(groundblock, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           if (gametimes[itemnum-1] == 2) {
-            ctx.drawImage(brickblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(brickblock, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 3) {
-            ctx.drawImage(under_groundblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(under_groundblock, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 4) {
-            ctx.drawImage(under_brickblock, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(under_brickblock, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 11) {
-            ctx.drawImage(pipese1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipese1, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 12) {
-            ctx.drawImage(pipese2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipese2, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 13) {
-            ctx.drawImage(pipesm1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipesm1, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 14) {
-            ctx.drawImage(pipesm2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipesm2, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 15) {
-            ctx.drawImage(pipesc1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipesc1, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 16) {
-            ctx.drawImage(pipesc2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipesc2, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 17) {
-            ctx.drawImage(pipeue1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipeue1, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 18) {
-            ctx.drawImage(pipeue2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipeue2, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 19) {
-            ctx.drawImage(pipeum1, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipeum1, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 20) {
-            ctx.drawImage(pipeum2, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(pipeum2, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 95) {
-            ctx.drawImage(mushroom, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(mushroom, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 96) {
-            ctx.drawImage(oneup, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(oneup, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 97) {
-            ctx.drawImage(fireflower, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(fireflower, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 98) {
-            ctx.drawImage(star, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(star, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           else if (gametimes[itemnum-1] == 99) {
-            ctx.drawImage(coin, (row-32)+scrollx, collum, gamescreen.width/16, gamescreen.height/14)
+            ctx.drawImage(coin, (row-32)+scrollx, collum, blockwidth, blockheight)
           }
           i2 += 1
         }
@@ -433,10 +432,11 @@
     function drawscreen() {
       gamescreen.width = gamescreen.width
       gamescreen.height = gamescreen.height
-      ctx.clearRect(0, 0, gamescreen.width, gamescreen.height)
       if (windowloaded == 1) {
         getplayerimage()
-        ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
+        ctx.drawImage(background, (scrollx % gamescreen.width), 0, gamescreen.width+1, gamescreen.height)
+        ctx.drawImage(background, (scrollx % gamescreen.width)+gamescreen.width, 0, gamescreen.width+1, gamescreen.height)
+        //ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
         drawtiles()
         drawenemies()
         if (iframes % 2 < 1) {
@@ -455,6 +455,7 @@
       if (iframes > 0) {
         iframes -= 0.5
       }
+      globaltimer ++
     }, 16)
 
     document.addEventListener("keydown",function(e){
