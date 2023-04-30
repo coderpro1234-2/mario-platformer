@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Mario Platformer</title>
-    <link id="icon" rel="icon" href="images/player/stand.png">
+    <link id="icon" rel="icon" href="images/player/small/stand.png">
   </head>
   <body>
     <img id="gameBackground" src="images/background.png" hidden>
@@ -49,6 +49,12 @@
     <img id="oneup" src="images/power-ups/oneup.png" hidden>
     <img id="fireflower" src="images/power-ups/fireflower.png" hidden>
     <img id="star" src="images/power-ups/star.png" hidden>
+    <img id="goombaoverwalk1" src="images/enemies/goombaover/walk1.png" hidden>
+    <img id="goombaoverwalk2" src="images/enemies/goombaover/walk2.png" hidden>
+    <img id="goombaoverdied" src="images/enemies/goombaover/died.png" hidden>
+    <img id="goombaunderwalk1" src="images/enemies/goombaunder/walk1.png" hidden>
+    <img id="goombaunderwalk2" src="images/enemies/goombaunder/walk2.png" hidden>
+    <img id="goombaunderdied" src="images/enemies/goombaunder/died.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
       <canvas id="game" width="512", height="448"></canvas>
@@ -67,10 +73,12 @@
     4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
     4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,
     4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    4,95,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
+    const invisblock = [95,96,97,98,99]
+    enemydata = [[608,256,-0.7,0,1,"goombaover",false],[325,256,-0.7,0,1,"goombaunder",false]]
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
@@ -79,10 +87,12 @@
     var mariotype = "small"
     var mariox = 48
     var marioy = 32
+    var tmarioy = 32
     var marwidth = 32
     var marheight = 64
     var blockwidth = 32
     var blockheight = 32
+    var iframes = 0
     var ground = 'no'
     var xid = 0
     var yid = 0
@@ -130,6 +140,16 @@
       }
     }
 
+    function calcenemy(enemyx,enemyy,offx,offy) {
+      xid = Math.floor((enemyx+(offx))/blockwidth)
+      yid = Math.floor((enemyy+(offy))/blockheight)
+      itemid = gametimes[xid+(yid*(screenwidth+scrolllength))]
+      if (invisblock.includes(itemid)) {
+        return 0;
+      }
+      return itemid;
+    }
+
     function checkmario(feet) {
       count = 0
       if (feet) {
@@ -143,10 +163,19 @@
         count += calcmario(1, 31, false)  
         count += calcmario(31, 1-(marheight-32), false)
         count += calcmario(31, 1, false)
-        count += calcmario(30, 1-(marheight-32), true)
-        count += calcmario(3, 1-(marheight-32), true)        
+        count += calcmario(24, 1-(marheight-32), true)
+        count += calcmario(7, 1-(marheight-32), true)        
       }
       return count;
+    }
+
+    function checkenemy(enemyx,enemyy) {
+      count = 0
+      count += calcenemy(enemyx, enemyy, 1, 1)
+      count += calcenemy(enemyx, enemyy, 31, 31)
+      count += calcenemy(enemyx, enemyy, 1, 31)  
+      count += calcenemy(enemyx, enemyy, 31, 1)
+      return count
     }
 
     function movemario() {
@@ -170,6 +199,9 @@
       ground = 'no'
       if (checkmario(false) > 0) {
         marioy -= vely
+        if (checkmario(false) > 0 && checkmario(true) == 0) {
+          marioy += 0.2
+        }
         if (checkmario(true) && vely > -0.01) {
           ground = 'yes'
         }
@@ -182,9 +214,70 @@
       if (mariotype == "big") {
         marwidth = 32
         marheight = 64
-        if ((keys.includes("s") || keys.includes("ArrowDown")) && ground == "yes") {
+        if ((keys.includes("s") || keys.includes("ArrowDown"))) {
           marheight = 48
         }
+      }
+    }
+
+    function take_damage() {
+      if (iframes > 0) {
+        return
+      }
+      if (mariotype == "small") {
+        alert("You Died :(")
+        window.location.reload()
+      }
+      else {
+        mariotype = "small"
+        marheight = 32
+      }
+      iframes = 60
+    }
+
+    function moveenimies() {
+      i = 0
+      while (i < enemydata.length) {
+        b = enemydata.at(i)
+        enex = b[0]
+        eney = b[1]
+        enesx = b[2]
+        enesy = b[3]
+        enetimer = b[4]
+        enetimer += 0.05
+        enesy += 0.2
+        enex += enesx
+        if (checkenemy(enex,eney) > 0) {
+          enex -= enesx
+          enesx = 0-enesx
+        }
+        eney += enesy
+        if (checkenemy(enex,eney) > 0) {
+          eney -= enesy
+          enesy = 0
+        }
+
+        if ((Math.round(marioy) < Math.round(eney) && Math.round(marioy) > Math.round(eney)-32) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
+          if (vely > 0) {
+            enesx = 0
+            enesy = 0
+            enetimer = -1.5
+            vely -= 10
+          }
+        }
+        if (((Math.round(tmarioy) == Math.round(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
+          take_damage()
+        }
+        enemydata[i] = [enex,eney,enesx,enesy,enetimer,b[5],b[6]]
+        if (Math.round(b[4]) == 0) {
+          b[6] = true
+        }
+        if (b[6] == true) {
+          enemydata.splice(i,1)
+        }
+        else {
+          i++
+        }  
       }
     }
 
@@ -196,7 +289,7 @@
         if (keys.includes(" ")) {
           velx -= 0.2
         }
-        velx -= 0.6
+        velx -= 0.8
       }
       if (keys.includes("d") || keys.includes("ArrowRight")) {
         if (ground == "yes") {
@@ -205,7 +298,7 @@
         if (keys.includes(" ")) {
           velx += 0.2
         }
-        velx += 0.6
+        velx += 0.8
       }
       if (keys.includes("s") || keys.includes("ArrowDown")) {
         if (ground == "yes") {
@@ -214,7 +307,12 @@
       }
       if (keys.includes("w") || keys.includes("ArrowUp")) {
         if (ground == 'yes') {
-          vely = -7.3
+          if (keys.includes("s") || keys.includes("ArrowDown")) {
+            vely = -4
+          }
+          else {
+            vely = -7.3
+          }
           ground = 'no'
         }
       }      
@@ -298,12 +396,12 @@
 
     function getplayerimage() {
       playerimage = document.getElementById(mariotype+"playerstand"+key)
-      if (ground == 'no') {
-        playerimage = document.getElementById(mariotype+"playerjump"+key)
-        return;
-      }
       if (keys.includes("s") || keys.includes("ArrowDown")) {
         playerimage = document.getElementById(mariotype+"playercrouch"+key)
+        return;
+      }
+      if (ground == 'no') {
+        playerimage = document.getElementById(mariotype+"playerjump"+key)
         return;
       }
       if (Math.abs(velx) > 0.08) {
@@ -314,16 +412,36 @@
       animation = 0
     }
 
+    function drawenemies() {
+      i = 0
+      while (i < enemydata.length) {
+        b = enemydata.at(i)
+        if (b.at(4) < 0) {
+          tiledraw = document.getElementById(b.at(5)+"died")
+        }
+        else if (b.at(4) % 2 < 1) {
+          tiledraw = document.getElementById(b.at(5)+"walk2")
+        }
+        else {
+          tiledraw = document.getElementById(b.at(5)+"walk1")
+        }
+        ctx.drawImage(tiledraw, b.at(0)+scrollx, b.at(1), 32, 32)
+        i++
+      }
+    }
+
     function drawscreen() {
       gamescreen.width = gamescreen.width
       gamescreen.height = gamescreen.height
       ctx.clearRect(0, 0, gamescreen.width, gamescreen.height)
       if (windowloaded == 1) {
         getplayerimage()
-        icon.href = playerimage.src
         ctx.drawImage(background, 0, 0, gamescreen.width, gamescreen.height)
         drawtiles()
-        ctx.drawImage((playerimage), mariox+scrollx, marioy-(marheight-32), marwidth, marheight)
+        drawenemies()
+        if (iframes % 2 < 1) {
+          ctx.drawImage(playerimage, mariox+scrollx, tmarioy, marwidth, marheight)
+        }
       }
       ctx.stroke()
     }
@@ -331,7 +449,12 @@
     setInterval(function(){
       checkkeys()
       movemario()
+      tmarioy = marioy-(marheight-32)
+      moveenimies()
       drawscreen()
+      if (iframes > 0) {
+        iframes -= 0.5
+      }
     }, 16)
 
     document.addEventListener("keydown",function(e){
