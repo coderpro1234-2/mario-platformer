@@ -52,9 +52,23 @@
     <img id="goombaoverwalk1" src="images/enemies/goombaover/walk1.png" hidden>
     <img id="goombaoverwalk2" src="images/enemies/goombaover/walk2.png" hidden>
     <img id="goombaoverdied" src="images/enemies/goombaover/died.png" hidden>
+    <img id="goombaoverwalk1r" src="images/enemies/goombaover/walk1r.png" hidden>
+    <img id="goombaoverwalk2r" src="images/enemies/goombaover/walk2r.png" hidden>
+    <img id="goombaoverdiedr" src="images/enemies/goombaover/diedr.png" hidden>
     <img id="goombaunderwalk1" src="images/enemies/goombaunder/walk1.png" hidden>
     <img id="goombaunderwalk2" src="images/enemies/goombaunder/walk2.png" hidden>
     <img id="goombaunderdied" src="images/enemies/goombaunder/died.png" hidden>
+    <img id="goombaunderwalk1r" src="images/enemies/goombaunder/walk1r.png" hidden>
+    <img id="goombaunderwalk2r" src="images/enemies/goombaunder/walk2r.png" hidden>
+    <img id="goombaunderdiedr" src="images/enemies/goombaunder/diedr.png" hidden>
+    <img id="greenkoopaoverwalk1" src="images/enemies/greenkoopaover/walk1.png" hidden>
+    <img id="greenkoopaoverwalk2" src="images/enemies/greenkoopaover/walk2.png" hidden>
+    <img id="greenkoopaoverwalk1r" src="images/enemies/greenkoopaover/walk1r.png" hidden>
+    <img id="greenkoopaoverwalk2r" src="images/enemies/greenkoopaover/walk2r.png" hidden>
+    <img id="greenkoopashelloverwalk1" src="images/enemies/greenkoopashellover/walk1.png" hidden>
+    <img id="greenkoopashelloverwalk2" src="images/enemies/greenkoopashellover/walk2.png" hidden>
+    <img id="greenkoopashelloverwalk1r" src="images/enemies/greenkoopashellover/walk1r.png" hidden>
+    <img id="greenkoopashelloverwalk2r" src="images/enemies/greenkoopashellover/walk2r.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
       <canvas id="game" width="512", height="448"></canvas>
@@ -62,23 +76,23 @@
   </body>
   <script>
     const keys = ["nevergonnagoaway"]
-    const gametimes = [4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,2,4,2,4,2,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,4,4,2,4,4,2,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,4,4,2,4,4,2,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-    4,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    const gametimes = [3,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,2,4,2,4,2,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,4,4,4,4,2,4,4,2,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,2,2,4,2,4,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,4,2,4,2,4,4,4,2,4,4,2,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,99,99,99,99,99,0,0,0,0,0,4,2,4,2,4,2,4,4,4,4,4,2,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     const invisblock = [95,96,97,98,99]
-    var enemydata = [[608,256,-0.7,0,1,"goombaover",false],[325,256,-0.7,0,1,"goombaunder",false]]
+    var enemydata = [[608,256,-0.7,0,1,"greenkoopaover",0],[325,256,-0.7,0,1,"goombaunder",0]]
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
@@ -141,12 +155,20 @@
       }
     }
 
-    function calcenemy(enemyx,enemyy,offx,offy) {
+    function calcenemy(enemyx,enemyy,offx,offy,type = "") {
       xid = Math.floor((enemyx+(offx))/blockwidth)
       yid = Math.floor((enemyy+(offy))/blockheight)
       itemid = gametimes[xid+(yid*(screenwidth+scrolllength))]
       if (invisblock.includes(itemid)) {
         return 0;
+      }
+      if (type == "") {
+        return itemid;
+      }
+      if (type == "greenkoopashellover") {
+        if (itemid == 2 || itemid == 4) {
+          gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
+        }
       }
       return itemid;
     }
@@ -187,7 +209,8 @@
         mariox -= velx
         velx = 0
       }
-      if (mariox > 224) {
+      
+      if (mariox >= 224) {
         scrollx -= velx
       }
       if (scrollx < minscroll) {
@@ -226,7 +249,7 @@
         return
       }
       if (mariotype == "small") {
-        alert("You Died :(")
+        document.getElementById("coin").innerHTML = "You Died :("
         window.location.reload()
       }
       else {
@@ -246,34 +269,82 @@
         enesy = b[3]
         enetimer = b[4]
         enetimer += 0.05
+        b[6] -= 0.5
+        if (b[6] < 0) {
+          b[6] = 0
+        }
         enesy += 0.2
         enex += enesx
-        if (checkenemy(enex,eney) > 0) {
-          enex -= enesx
-          enesx = 0-enesx
-        }
+          if (checkenemy(enex,eney) > 0) {
+            if (b[5] == "greenkoopashellover") {
+              calcenemy(enex, eney, 1, 31, b[5])
+              calcenemy(enex, eney, 31, 1, b[5])
+            }
+            enex -= enesx
+            enesx = 0-enesx
+          }
         eney += enesy
         if (checkenemy(enex,eney) > 0) {
           eney -= enesy
           enesy = 0
         }
-
         if ((Math.round(marioy) < Math.round(eney) && Math.round(marioy) > Math.round(eney)-32) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
           if (vely > 0) {
+            if (b[5] == "greenkoopaover") {
+              b[5] = "greenkoopashellover"
+              enesx = 0
+              vely = -5
+            }
+            else if (b[5] == "greenkoopaunder") {
+              b[5] = "greenkoopashellunder"
+              enesx = 0
+              vely = -5
+            }
+            else if (b[5] == "redkoopa") {
+              b[5] = "redkoopashell"
+              enesx = 0
+              vely = -5
+            }
+            else if (b[5] == "greenkoopashellover") {
+              if (enesx != 0) {
+                enesx = 0
+              }
+              else {
+                if (mariox+16 > enex+16) {
+                  enesx = -5
+                }
+                else {
+                  enesx = 5
+                }
+              }
+              vely = -5
+            }
+            else {
             enesx = 0
             enesy = 0
             enetimer = -1.5
-            vely = -5
+            vely = -5              
+            }
           }
         }
-        if (((Math.round(tmarioy) == Math.round(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
-          take_damage()
+        if (((Math.floor(marioy) == Math.floor(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
+          if ((Math.floor(marioy) == Math.floor(eney)) && (b[5] == "greenkoopashellover") && enesx == 0) {
+            if (mariox+16 > enex+16) {
+              enesx = -5
+            }
+            else {
+              enesx = 5
+            }
+            b[6] = 10
+          }
+          else {
+            if (b[6] == 0) {
+              take_damage()
+            }
+          }
         }
         enemydata[i] = [enex,eney,enesx,enesy,enetimer,b[5],b[6]]
         if (Math.round(b[4]) == 0) {
-          b[6] = true
-        }
-        if (b[6] == true) {
           enemydata.splice(i,1)
         }
         else {
@@ -417,14 +488,23 @@
         b = enemydata.at(i)
         if (b.at(4) < 0) {
           tiledraw = document.getElementById(b.at(5)+"died")
+          if (b[2] > 0) {
+            tiledraw = document.getElementById(b.at(5)+"diedr")
+          }
         }
         else if (b.at(4) % 2 < 1) {
           tiledraw = document.getElementById(b.at(5)+"walk2")
+          if (b[2] > 0) {
+            tiledraw = document.getElementById(b.at(5)+"walk2r")
+          }
         }
         else {
           tiledraw = document.getElementById(b.at(5)+"walk1")
+          if (b[2] > 0) {
+            tiledraw = document.getElementById(b.at(5)+"walk1r")
+          }
         }
-        ctx.drawImage(tiledraw, b.at(0)+scrollx, b.at(1), 32, 32)
+        ctx.drawImage(tiledraw, b.at(0)+scrollx, b.at(1)-(tiledraw.height-32), 32, tiledraw.height)
         i++
       }
     }
