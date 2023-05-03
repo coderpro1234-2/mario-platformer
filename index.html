@@ -45,7 +45,10 @@
     <img id="pipeue2" src="images/pipes/pipe-ue2.png" hidden>
     <img id="pipeum1" src="images/pipes/pipe-um1.png" hidden>
     <img id="pipeum2" src="images/pipes/pipe-um2.png" hidden>
-    <img id="mushroom" src="images/power-ups/mushroom.png" hidden>
+    <img id="mushroomwalk1" src="images/power-ups/mushroom.png" hidden>
+    <img id="mushroomwalk1r" src="images/power-ups/mushroom.png" hidden>
+    <img id="mushroomwalk2" src="images/power-ups/mushroom.png" hidden>
+    <img id="mushroomwalk2r" src="images/power-ups/mushroom.png" hidden>
     <img id="oneup" src="images/power-ups/oneup.png" hidden>
     <img id="fireflower" src="images/power-ups/fireflower.png" hidden>
     <img id="star" src="images/power-ups/star.png" hidden>
@@ -66,9 +69,17 @@
     <img id="greenkoopaoverwalk1r" src="images/enemies/greenkoopaover/walk1r.png" hidden>
     <img id="greenkoopaoverwalk2r" src="images/enemies/greenkoopaover/walk2r.png" hidden>
     <img id="greenkoopashelloverwalk1" src="images/enemies/greenkoopashellover/walk1.png" hidden>
-    <img id="greenkoopashelloverwalk2" src="images/enemies/greenkoopashellover/walk2.png" hidden>
-    <img id="greenkoopashelloverwalk1r" src="images/enemies/greenkoopashellover/walk1r.png" hidden>
-    <img id="greenkoopashelloverwalk2r" src="images/enemies/greenkoopashellover/walk2r.png" hidden>
+    <img id="greenkoopashelloverwalk2" src="images/enemies/greenkoopashellover/walk1.png" hidden>
+    <img id="greenkoopashelloverwalk1r" src="images/enemies/greenkoopashellover/walk1.png" hidden>
+    <img id="greenkoopashelloverwalk2r" src="images/enemies/greenkoopashellover/walk1.png" hidden>
+    <img id="greenkoopaunderwalk1" src="images/enemies/greenkoopaunder/walk1.png" hidden>
+    <img id="greenkoopaunderwalk2" src="images/enemies/greenkoopaunder/walk2.png" hidden>
+    <img id="greenkoopaunderwalk1r" src="images/enemies/greenkoopaunder/walk1r.png" hidden>
+    <img id="greenkoopaunderwalk2r" src="images/enemies/greenkoopaunder/walk2r.png" hidden>
+    <img id="greenkoopashellunderwalk1" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
+    <img id="greenkoopashellunderwalk2" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
+    <img id="greenkoopashellunderwalk1r" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
+    <img id="greenkoopashellunderwalk2r" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
       <canvas id="game" width="512", height="448"></canvas>
@@ -87,12 +98,12 @@
     3,0,0,0,99,99,99,99,99,99,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,3,
     3,0,0,0,4,4,4,4,4,4,4,0,0,0,0,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
     3,0,0,0,4,4,4,4,4,4,4,0,0,11,13,15,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
-    3,0,0,0,4,4,4,4,4,4,4,0,95,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
+    3,0,0,0,4,4,4,4,4,4,4,0,0,12,14,16,20,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     const invisblock = [95,96,97,98,99]
-    var enemydata = [[608,256,-0.7,0,1,"greenkoopaover",0],[325,256,-0.7,0,1,"goombaunder",0]]
+    var enemydata = [[608,256,-0.7,0,1,"greenkoopaunder",0],[325,256,-0.7,0,1,"goombaunder",0],[384,352,-0.7,0,1,"mushroom",0]]
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
@@ -139,11 +150,6 @@
         }
         return itemid;
       }
-      if (itemid == 95) {
-        gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
-        mariotype = "big"
-        return 0;
-      }
       if (itemid == 99) {
         gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
         coins ++
@@ -165,7 +171,7 @@
       if (type == "") {
         return itemid;
       }
-      if (type == "greenkoopashellover") {
+      if (type == "greenkoopashellover" || type == "greenkoopashellunder") {
         if (itemid == 2 || itemid == 4) {
           gametimes[xid+(yid*(screenwidth+scrolllength))] = 0
         }
@@ -280,6 +286,10 @@
               calcenemy(enex, eney, 1, 31, b[5])
               calcenemy(enex, eney, 31, 1, b[5])
             }
+            if (b[5] == "greenkoopashellunder") {
+              calcenemy(enex, eney, 1, 31, b[5])
+              calcenemy(enex, eney, 31, 1, b[5])
+            }
             enex -= enesx
             enesx = 0-enesx
           }
@@ -305,7 +315,7 @@
               enesx = 0
               vely = -5
             }
-            else if (b[5] == "greenkoopashellover") {
+            else if (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder") {
               if (enesx != 0) {
                 enesx = 0
               }
@@ -319,6 +329,17 @@
               }
               vely = -5
             }
+            else if (b[5] == "mushroom") {
+              if (checkmario(false) == 0) {
+                mariotype = "big"
+                if (checkmario(false) > 0) {
+                  mariotype = "small"
+                }
+                if (checkmario(false) == 0) {
+                  enetimer = 0
+                }
+              }
+            }
             else {
             enesx = 0
             enesy = 0
@@ -328,7 +349,7 @@
           }
         }
         if (((Math.floor(marioy) == Math.floor(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
-          if ((Math.floor(marioy) == Math.floor(eney)) && (b[5] == "greenkoopashellover") && enesx == 0) {
+          if ((Math.floor(marioy) == Math.floor(eney)) && (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder") && enesx == 0) {
             if (mariox+16 > enex+16) {
               enesx = -5
             }
@@ -337,6 +358,17 @@
             }
             b[6] = 10
           }
+          else if (b[5] == "mushroom") {
+            if (checkmario(false) == 0) {
+              mariotype = "big"
+              if (checkmario(false) > 0) {
+                mariotype = "small"
+              }
+              if (checkmario(false) == 0) {
+                enetimer = 0
+              }
+            }
+          }
           else {
             if (b[6] == 0) {
               take_damage()
@@ -344,7 +376,7 @@
           }
         }
         enemydata[i] = [enex,eney,enesx,enesy,enetimer,b[5],b[6]]
-        if (Math.round(b[4]) == 0) {
+        if (Math.round(enetimer) == 0 || Math.round(b[4]) == 0) {
           enemydata.splice(i,1)
         }
         else {
