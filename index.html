@@ -80,6 +80,14 @@
     <img id="greenkoopashellunderwalk2" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
     <img id="greenkoopashellunderwalk1r" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
     <img id="greenkoopashellunderwalk2r" src="images/enemies/greenkoopashellunder/walk1.png" hidden>
+    <img id="redkoopawalk1" src="images/enemies/redkoopa/walk1.png" hidden>
+    <img id="redkoopawalk2" src="images/enemies/redkoopa/walk2.png" hidden>
+    <img id="redkoopawalk1r" src="images/enemies/redkoopa/walk1r.png" hidden>
+    <img id="redkoopawalk2r" src="images/enemies/redkoopa/walk2r.png" hidden>
+    <img id="redkoopashellwalk1" src="images/enemies/redkoopashell/walk1.png" hidden>
+    <img id="redkoopashellwalk2" src="images/enemies/redkoopashell/walk1.png" hidden>
+    <img id="redkoopashellwalk1r" src="images/enemies/redkoopashell/walk1.png" hidden>
+    <img id="redkoopashellwalk2r" src="images/enemies/redkoopashell/walk1.png" hidden>
     <center>
       <h3 id="coin">Coins: 0</h3>
       <canvas id="game" width="512", height="448"></canvas>
@@ -103,7 +111,7 @@
     3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     const playerframes = []
     const invisblock = [95,96,97,98,99]
-    var enemydata = [[608,256,-0.7,0,1,"greenkoopaunder",0],[325,256,-0.7,0,1,"goombaunder",0],[384,352,-0.7,0,1,"mushroom",0]]
+    var enemydata = [[576,256,-0.7,0,1,"greenkoopaover",0],[608,256,-0.7,0,1,"greenkoopaunder",0],[640,256,-0.7,0,1,"redkoopa",0],[166,256,-0.7,0,1,"goombaunder",0],[198,256,-0.7,0,1,"goombaover",0],[384,352,-0.7,0,1,"mushroom",0]]
     var gamescreen = document.getElementById('game')
     var ctx = gamescreen.getContext("2d")
     var windowloaded = 0
@@ -290,6 +298,10 @@
               calcenemy(enex, eney, 1, 31, b[5])
               calcenemy(enex, eney, 31, 1, b[5])
             }
+            if (b[5] == "redkoopashell") {
+              calcenemy(enex, eney, 1, 31, b[5])
+              calcenemy(enex, eney, 31, 1, b[5])
+            }
             enex -= enesx
             enesx = 0-enesx
           }
@@ -315,7 +327,7 @@
               enesx = 0
               vely = -5
             }
-            else if (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder") {
+            else if (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder" || b[5] == "redkoopashell") {
               if (enesx != 0) {
                 enesx = 0
               }
@@ -349,7 +361,7 @@
           }
         }
         if (((Math.floor(marioy) == Math.floor(eney) || Math.round(marioy) == Math.round(eney)) || (Math.round(tmarioy)-32 < Math.round(eney) && Math.round(tmarioy) > Math.round(eney))) && (mariox+32 > enex && mariox < enex+32) && enetimer > 0) {
-          if ((Math.floor(marioy) == Math.floor(eney)) && (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder") && enesx == 0) {
+          if ((Math.floor(marioy) == Math.floor(eney)) && (b[5] == "greenkoopashellover" || b[5] == "greenkoopashellunder" || b[5] == "redkoopashell") && enesx == 0) {
             if (mariox+16 > enex+16) {
               enesx = -5
             }
