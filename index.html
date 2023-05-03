@@ -121,6 +121,9 @@
     var mariotype = "small"
     var mariox = 48
     var marioy = 32
+    var oldmx = mariox
+    var oldmy = marioy
+    var reloaded = 0
     var tmarioy = 32
     var marwidth = 32
     var marheight = 64
@@ -429,7 +432,11 @@
           }
           ground = 'no'
         }
-      }      
+      }
+      if (keys.includes("r") && reloaded == 0) {
+        reloaded = 1
+        window.location.reload()
+      }
     }
 
     function drawtiles() {
